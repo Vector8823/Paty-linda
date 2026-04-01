@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mensaje bonito</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(160deg,#ffdde1,#ee9ca7);
+font-family: Arial, Helvetica, sans-serif;
+overflow:hidden;
+}
+
+/* Contenedor principal */
+.contenedor{
+width:90%;
+max-width:420px;
+background:white;
+padding:35px 25px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.2);
+position:relative;
+}
+
+/* Texto */
+#mensaje{
+font-size:22px;
+line-height:1.5;
+color:#333;
+min-height:70px;
+margin-bottom:25px;
+}
+
+/* Botón */
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#ff5e7e;
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+/* Tulipanes */
+.tulipan{
+position:absolute;
+font-size:28px;
+animation: flotar 6s linear infinite;
+opacity:0.9;
+}
+
+@keyframes flotar{
+0%{
+transform: translateY(0) rotate(0deg);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform: translateY(-800px) rotate(360deg);
+opacity:0;
+}
+}
+
+/* Posiciones iniciales */
+.t1{left:10%;}
+.t2{left:30%;}
+.t3{left:50%;}
+.t4{left:70%;}
+.t5{left:85%;}
+
+/* Mejor ajuste para pantallas pequeñas */
+@media (max-width:480px){
+#mensaje{
+font-size:20px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+<h2 style="margin-bottom:15px;">🌷 Para ti Paty 🌷</h2>
+
+<div id="mensaje"></div>
+
+<button onclick="mostrarMensaje()">Mostrar mensaje bonito</button>
+</div>
+
+<script>
+const texto = "Ты выглядишь очень красиво, хорошего тебе дня.";
+
+let i = 0;
+
+function mostrarMensaje(){
+const mensaje = document.getElementById("mensaje");
+mensaje.textContent = "";
+i = 0;
+escribir();
+crearTulipanes();
+}
+
+function escribir(){
+if(i < texto.length){
+document.getElementById("mensaje").textContent += texto.charAt(i);
+i++;
+setTimeout(escribir, 50);
+}
+}
+
+function crearTulipanes(){
+for(let j=0; j<15; j++){
+let tulipan = document.createElement("div");
+tulipan.className = "tulipan t" + (Math.floor(Math.random()*5)+1);
+tulipan.innerHTML = "🌷";
+tulipan.style.bottom = "-40px";
+tulipan.style.animationDuration = (Math.random()*3+4)+"s";
+document.body.appendChild(tulipan);
+
+setTimeout(()=>{
+tulipan.remove();
+},7000);
+}
+}
+</script>
+
+</body>
+</html>
